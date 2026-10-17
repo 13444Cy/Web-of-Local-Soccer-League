@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header</title>
+  <link rel="stylesheet" href="http://localhost/project%20of%20Local%20soccer%20league%20manager/css/HeaderStyles.css">
+</head>
+<body>
+  <header>
+    <div class="left-section">
+      <img onclick="toggleSidebar()" src="http://localhost/project%20of%20Local%20soccer%20league%20manager/icon/menu.png" class="menu">
+      <div class="Logo" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/SuperLeague.php'">
+        <img src="http://localhost/project%20of%20Local%20soccer%20league%20manager/Logo/logo.jpg" class="logo">
+        <h2>Super <br>League</h2>
+      </div>
+    </div>
+    <div class="show">
+      <!-- <button class="show_buttons">Matches</button> -->
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Matches.php'">
+          Matches
+      </button>
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Table.php'">
+          Table
+      
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Clubs.php'">
+          Clubs
+      </button>
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Players.php'">
+          Players
+      </button>
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Transfers.php'">
+          Transfers
+      </button>
+      <button class="show_buttons" onclick="window.location.href='http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Config Match.php'">
+          Matches Management
+      </button>
+    </div>
+  </header>
+
+  <nav id="sidebar" class="sidebar">
+        <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Matches.php">Matches</a>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Table.php">Table</a>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Clubs.php">Clubs</a>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Players.php">Players</a>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Transfers.php">Transfers</a>
+        <a href="http://localhost/project%20of%20Local%20soccer%20league%20manager/html/Config Match.php">Matches Management</a>
+    </nav>
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

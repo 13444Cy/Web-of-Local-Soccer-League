@@ -1,0 +1,76 @@
+ // select the matches with teams's names (matche_view)
+ select h.name as home_team , a.name as away_team , matches.home_team_score, matches.away_team_score , matches.match_date from  matches inner join teams as h on matches.home_team_id = h.id inner join teams as a on matches.away_team_id = a.id ;
+
+ //Today's matches
+ select h.name as home_team , a.name as away_team , matches.home_team_score, matches.away_team_score , substring(matches.match_date, 12, 5) as match_date from  matches inner join teams as h on matches.home_team_id = h.id inner join teams as a on matches.away_team_id = a.id where date(matches.match_date) = curdate();
+
+ // Tomorrow's matches
+ select h.name as home_team , a.name as away_team , matches.home_team_score, matches.away_team_score , substring(matches.match_date, 12, 5) from  matches inner join teams as h on matches.home_team_id = h.id inner join teams as a on matches.away_team_id = a.id where date(matches.match_date) = curdate() + interval 1 day;
+
+
+
+ -- Create a view to calculate team standings
+CREATE OR REPLACE VIEW team_standings AS
+WITH match_results AS (
+    -- Home team matches
+    SELECT 
+        home_team_id AS team_id,
+        CASE 
+            WHEN home_team_score > away_team_score THEN 3  -- Win
+            WHEN home_team_score = away_team_score THEN 1  -- Draw
+            ELSE 0                                         -- Loss
+        END AS points,
+        home_team_score AS goals_for,
+        away_team_score AS goals_against,
+        home_team_score - away_team_score AS goal_difference,
+        CASE WHEN home_team_score > away_team_score THEN 1 ELSE 0 END AS wins,
+        CASE WHEN home_team_score = away_team_score THEN 1 ELSE 0 END AS draws,
+        CASE WHEN home_team_score < away_team_score THEN 1 ELSE 0 END AS losses
+    FROM matches
+    
+    UNION ALL
+    
+    -- Away team matches
+    SELECT 
+        away_team_id AS team_id,
+        CASE 
+            WHEN away_team_score > home_team_score THEN 3  -- Win
+            WHEN away_team_score = home_team_score THEN 1  -- Draw
+            ELSE 0                                         -- Loss
+        END AS points,
+        away_team_score AS goals_for,
+        home_team_score AS goals_against,
+        away_team_score - home_team_score AS goal_difference,
+        CASE WHEN away_team_score > home_team_score THEN 1 ELSE 0 END AS wins,
+        CASE WHEN away_team_score = home_team_score THEN 1 ELSE 0 END AS draws,
+        CASE WHEN away_team_score < home_team_score THEN 1 ELSE 0 END AS losses
+    FROM matches
+),
+team_stats AS (
+    SELECT 
+        team_id,
+        COUNT(*) AS matches_played,
+        SUM(points) AS total_points,
+        SUM(goals_for) AS goals_for,
+        SUM(goals_against) AS goals_against,
+        SUM(goal_difference) AS goal_difference,
+        SUM(wins) AS wins,
+        SUM(draws) AS draws,
+        SUM(losses) AS losses
+    FROM match_results
+    GROUP BY team_id
+)
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY ts.total_points DESC, ts.goal_difference DESC) AS position,
+    t.name AS team_name,
+    ts.matches_played,
+    ts.wins,
+    ts.draws,
+    ts.losses,
+    ts.goals_for,
+    ts.goals_against,
+    ts.goal_difference,
+    ts.total_points AS pts
+FROM team_stats ts
+INNER JOIN teams t ON ts.team_id = t.id
+ORDER BY ts.total_points DESC, ts.goal_difference DESC;
