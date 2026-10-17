@@ -1,0 +1,13 @@
+
+/*Main content styles */
+.Transfers_title {
+    margin-top: 20px;
+    color: white;
+    flex: 1;
+    font-size: 24px;
+    padding: 20px;
+    font-weight: bold;
+    background-color:#37003c;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}

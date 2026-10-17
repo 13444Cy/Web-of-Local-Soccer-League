@@ -1,0 +1,40 @@
+
+/*Main content styles */
+.Table_title {
+    margin-top: 20px;
+    color: white;
+    flex: 1;
+    font-size: 24px;
+    padding: 20px;
+    font-weight: bold;
+    background-color:#37003c;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.league_table{
+    margin-top: 100px;
+    width: 100%;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+.teams_column, .pos_column {
+    text-align: left;
+}
+.league_table td:nth-child(1) {
+    text-align: left;
+}
+.league_table td:nth-child(2) {
+    text-align: left;
+}
+.league_table th, .league_table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+.team_logo{
+    width: 20px;
+    padding-right: 10px;
+}
+
+

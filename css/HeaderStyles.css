@@ -1,0 +1,142 @@
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+    
+header {
+    background-color: #eaddd8;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 500;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu{
+    background-color: white;
+    border: none;
+    
+    cursor: pointer;
+    
+    width: 30px;
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.Logo img {
+    height: 50px; 
+    width: auto;
+}
+
+.Logo h2 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #333;
+}
+
+    
+.show {
+    flex:1;
+    display: flex;
+    justify-content: space-around;
+}
+
+.show_buttons {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: 0.3s;
+    color: #333;
+}
+
+.show_buttons:hover {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 5px;
+}
+
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: -250px;  
+    background-color: #eaddd8;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #000;
+    display: block;
+    font-weight: bold;
+    transition: 0.2s;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.sidebar a:hover {
+    background-color: #dccbc4;
+    padding-left: 35px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 900;
+}
+
+.overlay.active {
+    display: block;
+}
+
+    
+@media screen and (max-width: 768px) {
+    .show {
+        display: none;  
+    }
+}
